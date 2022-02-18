@@ -2,9 +2,8 @@
 
 A Visa Contacts App ☺️
 
-## Getting Started
+### An app for the users list of contacts that are on the Visa 💳 😎
 
-An app for the users list of contacts that are on the Visa 💳 😎
 
 🔥🔥🔥 A few resources used in this project 🔥🔥🔥:
 
