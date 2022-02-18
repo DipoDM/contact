@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         primaryColor: kVisaGold,
       ),
-      //home: const IntroScreen(),
       initialRoute: '/',
       routes: {
         '/': (context) => const IntroScreen(),

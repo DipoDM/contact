@@ -12,7 +12,10 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<Contacts> bookList = ref.watch(booksProvider);
+    List<Contacts> bookList = ref.watch(booksProvider);
+    bookList?.sort((a, b) {
+      return a.firstName.toLowerCase().compareTo(b.firstName.toLowerCase());
+    });
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
