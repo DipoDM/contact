@@ -5,14 +5,14 @@ class MediaButton extends StatelessWidget {
   final IconData buttonIcon;
   final Function action;
   final String buttonName;
-  final String sem;
+  final String semanticLabel;
 
   const MediaButton({
     Key key,
     this.buttonIcon,
     this.action,
     this.buttonName,
-    this.sem,
+    this.semanticLabel,
   }) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class MediaButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Semantics(
-          label: "$buttonName $sem",
+          label: "$buttonName $semanticLabel",
           child: Column(
             children: [
               Card(

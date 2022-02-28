@@ -79,6 +79,7 @@ class _DetailPageState extends State<DetailPage> {
                 children: [
                   Text(
                     "Confirm delete",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
@@ -93,14 +94,14 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       Consumer(
                         builder: (context, ref, child) {
-                          final ContacLi bookStateNotifier =
-                              ref.watch(booksProvider.notifier);
+                          final ContacLi contactStateNotifier =
+                              ref.watch(contactsStateList.notifier);
                           return ElevatedButton(
                             style:
                                 ElevatedButton.styleFrom(primary: Colors.green),
                             onPressed: () {
                               Navigator.pop(context);
-                              bookStateNotifier.remove(
+                              contactStateNotifier.remove(
                                   num: Contacts(
                                 id: widget.id,
                               ));
@@ -254,25 +255,25 @@ class _DetailPageState extends State<DetailPage> {
                 buttonIcon: Icons.message_outlined,
                 buttonName: "Message",
                 action: () {},
-                sem: widget.fName,
+                semanticLabel: widget.fName,
               ),
               MediaButton(
                 buttonIcon: Icons.video_call_outlined,
                 buttonName: "Video Call",
                 action: () {},
-                sem: widget.fName,
+                semanticLabel: widget.fName,
               ),
               MediaButton(
                 buttonIcon: Icons.phone_outlined,
                 buttonName: "Call",
                 action: () {},
-                sem: widget.fName,
+                semanticLabel: widget.fName,
               ),
               MediaButton(
                 buttonIcon: Icons.email_outlined,
                 buttonName: "Mail",
                 action: () {},
-                sem: widget.fName,
+                semanticLabel: widget.fName,
               ),
             ],
           ),

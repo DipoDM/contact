@@ -26,7 +26,6 @@ class ContactCard extends StatelessWidget {
         horizontal: 30,
       ),
       child: SizedBox.square(
-        // height: 150,
         child: ExcludeSemantics(
           child: Card(
             elevation: 5,
