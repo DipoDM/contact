@@ -26,79 +26,82 @@ class NewContactPage extends ConsumerWidget {
         body: SafeArea(
           child: Column(
             children: [
-              Wrap(
-                alignment: WrapAlignment.spaceBetween,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      "Cancel",
+              SizedBox(
+                width: displaySize(context).width,
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: kVisaBlue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const Text(
+                      "New Contact",
                       style: TextStyle(
-                        fontSize: 18,
-                        color: kVisaBlue,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  const Text(
-                    "New Contact",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      final isValid = _formKey.currentState.validate();
-                      if (!isValid) {
-                        return null;
-                      } else {
-                        contactStateNotifier.inert(
-                          num: Contacts(
-                            id: (initConList.length + 1).toString(),
-                            firstName: firstNameController.text.trim(),
-                            lastName: lastNameController.text.trim(),
-                            phoneNumber: phoneNumController.text.trim(),
-                            email: emailController.text.trim(),
-                            imagePath: "assets/images/user.jpeg",
-                          ),
-                        );
-                        _formKey.currentState.save();
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(
-                              SnackBar(
-                                duration: const Duration(seconds: 1),
-                                backgroundColor: Colors.red,
-                                content: Text(
-                                  'Saved',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color: kBlack,
+                    TextButton(
+                      onPressed: () {
+                        final isValid = _formKey.currentState.validate();
+                        if (!isValid) {
+                          return null;
+                        } else {
+                          contactStateNotifier.inert(
+                            num: Contacts(
+                              id: (initConList.length + 1).toString(),
+                              firstName: firstNameController.text.trim(),
+                              lastName: lastNameController.text.trim(),
+                              phoneNumber: phoneNumController.text.trim(),
+                              email: emailController.text.trim(),
+                              imagePath: "assets/images/user.jpeg",
+                            ),
+                          );
+                          _formKey.currentState.save();
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(
+                                SnackBar(
+                                  duration: const Duration(seconds: 1),
+                                  backgroundColor: Colors.red,
+                                  content: Text(
+                                    'Saved',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      color: kBlack,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )
-                            .closed
-                            .then(
-                              (value) => Navigator.pop(context),
-                            );
-                      }
-                    },
-                    child: Text(
-                      "Save",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: kVisaBlue,
-                        fontWeight: FontWeight.bold,
+                              )
+                              .closed
+                              .then(
+                                (value) => Navigator.pop(context),
+                              );
+                        }
+                      },
+                      child: Text(
+                        "Save",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: kVisaBlue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
               Expanded(
                 child: ListView(
