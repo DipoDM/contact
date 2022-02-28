@@ -2,6 +2,7 @@ import 'package:contact/Controllers/apiprovider.dart';
 import 'package:contact/Controllers/constants.dart';
 import 'package:contact/Models/json_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NewContactPage extends ConsumerWidget {
@@ -15,8 +16,8 @@ class NewContactPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ContacLi bookStateNotifier = ref.watch(booksProvider.notifier);
-    final List<Contacts> bookList = ref.watch(booksProvider);
+    final ContacLi contactStateNotifier = ref.watch(contactsStateList.notifier);
+    final List<Contacts> initConList = ref.watch(contactsStateList);
 
     return Form(
       key: _formKey,
@@ -25,8 +26,10 @@ class NewContactPage extends ConsumerWidget {
         body: SafeArea(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
                     onPressed: () {
@@ -54,9 +57,9 @@ class NewContactPage extends ConsumerWidget {
                       if (!isValid) {
                         return null;
                       } else {
-                        bookStateNotifier.inert(
+                        contactStateNotifier.inert(
                           num: Contacts(
-                            id: (bookList.length + 1).toString(),
+                            id: (initConList.length + 1).toString(),
                             firstName: firstNameController.text.trim(),
                             lastName: lastNameController.text.trim(),
                             phoneNumber: phoneNumController.text.trim(),
@@ -179,6 +182,9 @@ class NewContactPage extends ConsumerWidget {
                       child: TextFormField(
                         keyboardType: TextInputType.phone,
                         maxLength: 10,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'e.g 872 555 2390',

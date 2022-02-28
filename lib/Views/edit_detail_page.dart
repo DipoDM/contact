@@ -2,6 +2,7 @@ import 'package:contact/Controllers/apiprovider.dart';
 import 'package:contact/Controllers/constants.dart';
 import 'package:contact/Models/json_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:provider/provider.dart';
 
@@ -43,14 +44,10 @@ class _EditPageState extends State<EditPage> {
           key: _formKey,
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 width: displaySize(context).width,
                 child: Wrap(
-                  alignment: WrapAlignment
-                      .spaceBetween, //AxisAlignment: MainAxisAlignment.spaceBetween,
-                  // runAlignment: WrapAlignment.spaceBetween,
-                  // alignment: WrapAlignment,
-                  // runAlignment: WrapAlignment.spaceBetween,
+                  alignment: WrapAlignment.spaceBetween,
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     TextButton(
@@ -76,15 +73,15 @@ class _EditPageState extends State<EditPage> {
                     ),
                     Consumer(
                       builder: (context, ref, child) {
-                        final ContacLi bookStateNotifier =
-                            ref.watch(booksProvider.notifier);
+                        final ContacLi contactStateNotifier =
+                            ref.watch(contactsStateList.notifier);
                         return TextButton(
                           onPressed: () {
                             final isValid = _formKey.currentState.validate();
                             if (!isValid) {
                               return null;
                             } else {
-                              bookStateNotifier.update(
+                              contactStateNotifier.update(
                                 oldNum: Contacts(id: widget.id),
                                 newNum: Contacts(
                                   id: widget.id,
@@ -165,6 +162,7 @@ class _EditPageState extends State<EditPage> {
                       child: Center(
                         child: Text(
                           "${widget.fName} ${widget.lName}",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: kWhite,
                             fontSize: 30,
@@ -223,7 +221,7 @@ class _EditPageState extends State<EditPage> {
                               validator: (value) {
                                 if (value.isEmpty || value.trim().length == 0) {
                                   firstNameController.text = widget.fName;
-                                  return null; //'Please enter your first name.';
+                                  return null;
                                 } else {
                                   firstNameController.text =
                                       value.toString().trim();
@@ -294,6 +292,9 @@ class _EditPageState extends State<EditPage> {
                                 fontSize: 25,
                               ),
                               maxLength: 10,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               decoration: InputDecoration(
                                 counterStyle: TextStyle(color: kVisaGold),
                                 labelStyle: const TextStyle(

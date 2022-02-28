@@ -1,3 +1,5 @@
+// Model of the JSON data structure
+
 class Contacts {
   final String id;
   final String firstName;

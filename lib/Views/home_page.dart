@@ -12,8 +12,8 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<Contacts> bookList = ref.watch(booksProvider);
-    bookList?.sort((a, b) {
+    List<Contacts> initConList = ref.watch(contactsStateList);
+    initConList?.sort((a, b) {
       return a.firstName.toLowerCase().compareTo(b.firstName.toLowerCase());
     });
     return Scaffold(
@@ -32,12 +32,12 @@ class HomePage extends ConsumerWidget {
         ),
       ),
       backgroundColor:
-          bookList == null || bookList.isEmpty ? kWhite : kVisaBlue,
+          initConList == null || initConList.isEmpty ? kWhite : kVisaBlue,
       floatingActionButton: Semantics(
         attributedLabel: AttributedString('Add new contact'),
         child: FloatingActionButton(
           backgroundColor:
-              bookList == null || bookList.isEmpty ? kVisaGold : kWhite,
+              initConList == null || initConList.isEmpty ? kVisaGold : kWhite,
           onPressed: () {
             Navigator.pushNamed(context, "/new_contact");
           },
@@ -49,17 +49,17 @@ class HomePage extends ConsumerWidget {
         ),
       ),
       body: Center(
-        child: bookList == null
+        child: initConList == null
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : bookList.isEmpty
+            : initConList.isEmpty
                 ? Image.network(
                     "https://c.tenor.com/lx2WSGRk8bcAAAAC/pulp-fiction-john-travolta.gif",
                   )
                 : ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: bookList.length,
+                    itemCount: initConList.length,
                     itemBuilder: (_, index) {
                       return InkWell(
                         onTap: () {
@@ -67,26 +67,26 @@ class HomePage extends ConsumerWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => DetailPage(
-                                id: bookList[index].id,
-                                email: bookList[index].email,
-                                fName: bookList[index].firstName,
-                                lName: bookList[index].lastName,
-                                image: bookList[index].imagePath,
-                                pNum: bookList[index].phoneNumber,
+                                id: initConList[index].id,
+                                email: initConList[index].email,
+                                fName: initConList[index].firstName,
+                                lName: initConList[index].lastName,
+                                image: initConList[index].imagePath,
+                                pNum: initConList[index].phoneNumber,
                               ),
                             ),
                           );
                         },
                         child: Semantics(
                           label:
-                              "Contact Card for ${bookList[index].firstName} ${bookList[index].lastName}, phone number is ${bookList[index].phoneNumber} and email is ${bookList[index].email}",
+                              "Contact Card for ${initConList[index].firstName} ${initConList[index].lastName}, phone number is ${initConList[index].phoneNumber} and email is ${initConList[index].email}",
                           child: ContactCard(
-                            id: bookList[index].id,
-                            firstName: bookList[index].firstName,
-                            lastName: bookList[index].lastName,
-                            email: bookList[index].email,
-                            phoneNum: bookList[index].phoneNumber,
-                            imagePath: bookList[index].imagePath,
+                            id: initConList[index].id,
+                            firstName: initConList[index].firstName,
+                            lastName: initConList[index].lastName,
+                            email: initConList[index].email,
+                            phoneNum: initConList[index].phoneNumber,
+                            imagePath: initConList[index].imagePath,
                           ),
                         ),
                       );
